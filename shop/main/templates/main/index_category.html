@@ -1,0 +1,10 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+    {% for prod in products %}
+        <div class="title_box">
+            <img src="{{ prod.photo.url }}">
+            <a href="{% url 'product' prod.category.name prod.slug%}"><h5>{{ prod.name }}</h5></a>
+        </div>
+    {% endfor %}
+{% endblock %}

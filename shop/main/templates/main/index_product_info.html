@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+    <div class="info_box">
+        <img src="{{ prod.photo.url }}">
+        <h4>{{ prod.name }}</h4>
+        <p>{{ prod.description|linebreaks }}</p>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment_box">
+                    <div class="title_comment">
+                        <h5>{{ comment.date }}</h5>
+                        <h5>{{ comment.user_name }}</h5>
+                    </div>
+                    <p>{{ comment.comment }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <span></span>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="user_name" placeholder="Имя позьзователя">
+            <textarea style="resize: none" name="comment" placeholder="Комментарий" cols="70" rows="8"></textarea>
+            <input type="hidden" name="category" value="{{ prod.category.pk }}">
+            <button type="submit">Опубликовать</button>
+        </form>
+    </div>
+{% endblock %}
